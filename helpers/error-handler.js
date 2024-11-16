@@ -7,8 +7,12 @@ function errorHandler(err, req, res, next) {
     return res.status(401).json({ message: err });
   }
 
-  //drfault error
-  return res.status(500).json(err);
+  //default error
+  if (err) {
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: err.message });
+  }
 }
 
 module.exports = errorHandler;
